@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // -----------------------------------------
     const foldersData = [
         {
-            name: "Progettazione UI/UX", // Nome visualizzato per la cartella
+            name: "Io e super Lucy <3 i love u amore mio ti voglio tanto bene prova prova bla bla bla", // Nome visualizzato per la cartella
             id: "cartella1",           // Identificativo univoco (usato per i percorsi)
             photos: [ // Array di oggetti, uno per ogni foto/elemento
                 { image: "images/cartella1/foto1.jpg", audio: "audio/cartella1/islanda.mp3" },
