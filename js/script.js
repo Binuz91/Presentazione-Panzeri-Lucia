@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // -----------------------------------------
     const foldersData = [
         {
-            name: "Arte prende forma: La pasta di sale", // Nome visualizzato per la cartella
+            name: "Arte che prende forma: La pasta di sale", // Nome visualizzato per la cartella
             id: "cartella1",           // Identificativo univoco (usato per i percorsi)
             photos: [ // Array di oggetti, uno per ogni foto/elemento
                 { image: "images/cartella1/foto1.jpg", audio: "audio/cartella1/islanda.mp3" },
