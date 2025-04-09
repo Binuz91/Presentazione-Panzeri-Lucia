@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // -----------------------------------------
     const foldersData = [
         {
-            name: "L' arte prende forma: La pasta di sale", // Nome visualizzato per la cartella
+            name: "Arte prende forma: La pasta di sale", // Nome visualizzato per la cartella
             id: "cartella1",           // Identificativo univoco (usato per i percorsi)
             photos: [ // Array di oggetti, uno per ogni foto/elemento
                 { image: "images/cartella1/foto1.jpg", audio: "audio/cartella1/islanda.mp3" },
@@ -39,14 +39,14 @@ document.addEventListener('DOMContentLoaded', () => {
             ]
         },
          {
-            name: "L' arte in controluce: Costruiamo e raccontiamo con le ombre",
+            name: "Arte in controluce: Costruiamo e raccontiamo con le ombre",
             id: "cartella4",
             photos: [
                  { image: "images/cartella5/documento.pdf.png", audio: "audio/cartella5/info_documento.mp3"},
             ]
         },
          {
-            name: "L' arte dell' incontro: Colori in dialogo",
+            name: "Arte dell' incontro: Colori in dialogo",
             id: "cartella5",
             photos: [
                  // Usa screenshot o icone per file non immagine, se vuoi visualizzarli
