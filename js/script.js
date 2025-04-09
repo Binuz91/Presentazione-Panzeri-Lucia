@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // -----------------------------------------
     const foldersData = [
         {
-            name: "Io e super Lucy <3 i love u amore mio ti voglio tanto bene prova prova bla bla bla", // Nome visualizzato per la cartella
+            name: "L' arte prende forma: La pasta di sale", // Nome visualizzato per la cartella
             id: "cartella1",           // Identificativo univoco (usato per i percorsi)
             photos: [ // Array di oggetti, uno per ogni foto/elemento
                 { image: "images/cartella1/foto1.jpg", audio: "audio/cartella1/islanda.mp3" },
@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
             ]
         },
         {
-            name: "Mockup Responsive",
+            name: "Arte che brilla: Creazioni sulla lavagna luminosa",
             id: "cartella2",
             photos: [
                 { image: "images/cartella2/foto3.jpg",          audio: "audio/cartella2/audio_foto3.mp3" },
@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
             ]
         },
         {
-            name: "Ricerca e Analisi",
+            name: "Arte da toccare: Colori tra le dita",
             id: "cartella3",
             photos: [
                 { image: "images/cartella3/grafico1.png",       audio: "audio/cartella3/analisi_grafico.mp3" },
@@ -39,12 +39,12 @@ document.addEventListener('DOMContentLoaded', () => {
             ]
         },
          {
-            name: "Schizzi Preliminari",
+            name: "L' arte in controluce: Costruiamo e raccontiamo con le ombre",
             id: "cartella4",
-            photos: [] // Esempio di cartella senza foto
+                 { image: "images/cartella5/documento.pdf.png", audio: "audio/cartella5/info_documento.mp3"},
         },
          {
-            name: "Allegati e Risorse",
+            name: "L' arte dell' incontro: Colori in dialogo",
             id: "cartella5",
             photos: [
                  // Usa screenshot o icone per file non immagine, se vuoi visualizzarli
