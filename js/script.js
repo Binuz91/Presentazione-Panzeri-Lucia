@@ -41,7 +41,9 @@ document.addEventListener('DOMContentLoaded', () => {
          {
             name: "L' arte in controluce: Costruiamo e raccontiamo con le ombre",
             id: "cartella4",
+            photos: [
                  { image: "images/cartella5/documento.pdf.png", audio: "audio/cartella5/info_documento.mp3"},
+            ]
         },
          {
             name: "L' arte dell' incontro: Colori in dialogo",
