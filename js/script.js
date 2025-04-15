@@ -12,46 +12,113 @@ document.addEventListener('DOMContentLoaded', () => {
             name: "Arte che prende forma: La pasta di sale", // Nome visualizzato per la cartella
             id: "cartella1",           // Identificativo univoco (usato per i percorsi)
             photos: [ // Array di oggetti, uno per ogni foto/elemento
-                { image: "images/cartella1/foto1.jpg", audio: "audio/cartella1/islanda.mp3" },
-                { image: "images/cartella1/foto2.jpg", audio: "audio/cartella1/commento_foto2.mp3" },
-                { image: "images/cartella1/foto3.jpg", audio: "audio/cartella1/spiegazione_ui.mp3" },
-                { image: "images/cartella1/foto4.jpg", audio: null }, // Nessun audio per questa
-                { image: "images/cartella1/foto5.jpg", audio: "audio/cartella1/dettagli_finali.mp3" }
+                { image: "images/cartella1/1.jpg", },
+                { image: "images/cartella1/2.jpg", },
+                { image: "images/cartella1/3.jpg", },
+                { image: "images/cartella1/4.jpg", }, 
+                { image: "images/cartella1/5.jpg", },
+                { image: "images/cartella1/6.jpg", },
+                { image: "images/cartella1/6b.jpg", },
+                { image: "images/cartella1/7.jpg", },
+                { image: "images/cartella1/8.jpg", },
+                { image: "images/cartella1/9.jpg", },
+                { image: "images/cartella1/10.jpg", },
+                { image: "images/cartella1/11.jpg", },
+                { image: "images/cartella1/12.jpg", },
+                { image: "images/cartella1/13.jpg", },
+                { image: "images/cartella1/14.jpg", },
+                { image: "images/cartella1/15.jpg", },
+                { image: "images/cartella1/16.jpg", },
+                { image: "images/cartella1/17.jpg", },
+                { image: "images/cartella1/18.jpg", },
+                { image: "images/cartella1/19.jpg", },
+                { image: "images/cartella1/20.jpg", },
+                { image: "images/cartella1/21.jpg", },
             ]
         },
         {
             name: "Arte che brilla: Creazioni sulla lavagna luminosa",
             id: "cartella2",
             photos: [
-                { image: "images/cartella2/foto3.jpg",          audio: "audio/cartella2/audio_foto3.mp3" },
-                { image: "images/cartella2/mockup_mobile.jpg",  audio: "audio/cartella2/descrizione_mobile.mp3" },
-                { image: "images/cartella2/mockup_tablet.jpg",  audio: null }
+                { image: "images/cartella2/01.jpg",  audio: "audio/cartella2/01.m4a" },
+                { image: "images/cartella2/02.jpg",  audio: "audio/cartella2/02.m4a" },
+                { image: "images/cartella2/03.jpg",  audio: "audio/cartella2/03.m4a" },
+                { image: "images/cartella2/04.jpg",  audio: "audio/cartella2/04.m4a" },
+                { image: "images/cartella2/05.jpg",  audio: "audio/cartella2/05.m4a" },
+                { image: "images/cartella2/06.jpg",  audio: "audio/cartella2/06.m4a" },
+                { image: "images/cartella2/07.jpg",  audio: "audio/cartella2/07.m4a" },
+                { image: "images/cartella2/08.jpg",  audio: "audio/cartella2/08.m4a" },
+                { image: "images/cartella2/09.jpg",  audio: "audio/cartella2/09.m4a" },
+                { image: "images/cartella2/10.jpg",  audio: "audio/cartella2/10.m4a" },
+                { image: "images/cartella2/11.jpg",  audio: "audio/cartella2/11.m4a" },
+                { image: "images/cartella2/12.jpg",  audio: "audio/cartella2/12.m4a" },
+                { image: "images/cartella2/13.jpg",  audio: "audio/cartella2/13.m4a" },
+                { image: "images/cartella2/14.jpg",  audio: "audio/cartella2/14.m4a" },
+                { image: "images/cartella2/15.jpg",  audio: "audio/cartella2/15.m4a" },
+                { image: "images/cartella2/16.jpg",  audio: "audio/cartella2/16.m4a" },
+
             ]
         },
         {
             name: "Arte da toccare: Colori tra le dita",
             id: "cartella3",
             photos: [
-                { image: "images/cartella3/grafico1.png",       audio: "audio/cartella3/analisi_grafico.mp3" },
-                { image: "images/cartella3/intervista.jpg",     audio: "audio/cartella3/estratto_intervista.mp3" },
-                { image: "images/cartella3/personas.png",       audio: "audio/cartella3/spiegazione_personas.mp3" },
-                { image: "images/cartella3/user_journey.png",   audio: null }
+                { image: "images/cartella3/01.jpg",     audio: "audio/cartella3/01.mp3" },
+                { image: "images/cartella3/02.jpg",     audio: "audio/cartella3/02.mp3" },
+                { image: "images/cartella3/03.jpg",     audio: "audio/cartella3/03.mp3" },
+                { image: "images/cartella3/04.jpg",     audio: "audio/cartella3/04.mp3" },
+                { image: "images/cartella3/05.jpg",     audio: "audio/cartella3/05.mp3" },
+                { image: "images/cartella3/06.jpg",     audio: "audio/cartella3/06.mp3" },
+                { image: "images/cartella3/07.jpg",     audio: "audio/cartella3/07.mp3" },
+                { image: "images/cartella3/08.jpg",     audio: "audio/cartella3/08.mp3" },
+                { image: "images/cartella3/09.jpg",     audio: "audio/cartella3/09.mp3" },
+                { image: "images/cartella3/10.jpg",     audio: "audio/cartella3/10.mp3" },
+                { image: "images/cartella3/11.jpg",     audio: "audio/cartella3/11.mp3" },
+                { image: "images/cartella3/12.jpg",     audio: "audio/cartella3/12.mp3" },
+                { image: "images/cartella3/13.jpg",     audio: "audio/cartella3/13.mp3" },
+                { image: "images/cartella3/14.jpg",     audio: "audio/cartella3/14.mp3" },
+                { image: "images/cartella3/15.jpg",     audio: "audio/cartella3/15.mp3" },
+                { image: "images/cartella3/16.jpg",     audio: "audio/cartella3/16.mp3" },
             ]
         },
          {
             name: "Arte in controluce: Costruiamo e raccontiamo con le ombre",
             id: "cartella4",
             photos: [
-                 { image: "images/cartella5/documento.pdf.png", audio: "audio/cartella5/info_documento.mp3"},
+                { image: "images/cartella4/1.jpg"},
+                { image: "images/cartella4/2.jpg"},
+                { image: "images/cartella4/3.jpg"},
+                { image: "images/cartella4/4.jpg"},
+                { image: "images/cartella4/5.jpg"},
+                { image: "images/cartella4/6.jpg"},
+                { image: "images/cartella4/7.jpg"},
+                { image: "images/cartella4/8.jpg"},
+                { image: "images/cartella4/9.jpg"},
+                { image: "images/cartella4/10.jpg"},
+                { image: "images/cartella4/11.jpg"},
+                { image: "images/cartella4/12.jpg"},
+                { image: "images/cartella4/13.jpg"},
+                { image: "images/cartella4/14.jpg"},
+                { image: "images/cartella4/15.jpg"},
+                { image: "images/cartella4/16.jpg"},
+                { image: "images/cartella4/17.jpg"},
+                { image: "images/cartella4/18.jpg"},
             ]
+                
         },
          {
             name: "Arte dell' incontro: Colori in dialogo",
             id: "cartella5",
             photos: [
                  // Usa screenshot o icone per file non immagine, se vuoi visualizzarli
-                 { image: "images/cartella5/documento.pdf.png", audio: "audio/cartella5/info_documento.mp3"},
-                 { image: "images/cartella5/link_esterno.png",  audio: null}
+                 { image: "images/cartella5/1.jpg"},
+                 { image: "images/cartella5/2.jpg"},
+                 { image: "images/cartella5/3.jpg"},
+                 { image: "images/cartella5/4.jpg"},
+                 { image: "images/cartella5/5.jpg"},
+                 { image: "images/cartella5/6.jpg"},
+                 { image: "images/cartella5/7.jpg"},
+                 
             ]
         },
         // Aggiungi qui altre sezioni/cartelle del tuo progetto
