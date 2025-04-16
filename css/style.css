@@ -1,298 +1,131 @@
-/* Reset Base & Font */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
+/* Reset Base & Stile Globale */
+* { margin: 0; padding: 0; box-sizing: border-box; }
 :root {
-    /* Palette Colori Tema Scuro */
-    --bg-dark: #1a202c; /* Sfondo principale (Blu-Grigio Scuro) */
-    --bg-medium: #2d3748; /* Sfondo elementi (Grigio Scuro) */
-    --bg-light: #4a5568; /* Sfondo hover/accenti */
-    --text-primary: #e2e8f0; /* Testo principale (Grigio Chiaro) */
-    --text-secondary: #a0aec0; /* Testo secondario (Grigio Medio) */
-    --accent-blue: #4299e1; /* Blu Accento */
-    --accent-blue-dark: #2b6cb0; /* Blu Accento Scuro (Hover) */
-    --shadow-color: rgba(66, 153, 225, 0.15); /* Ombra azzurra tenue */
-    --shadow-color-darker: rgba(0, 0, 0, 0.5);
-
-    /* Timing Functions per Animazioni Eleganti */
-    --ease-out-cubic: cubic-bezier(0.215, 0.610, 0.355, 1.000);
-    --ease-in-out-cubic: cubic-bezier(0.645, 0.045, 0.355, 1.000);
-    --ease-back-out: cubic-bezier(0.175, 0.885, 0.320, 1.275); /* Effetto "elastico" */
+    /* Palette Colori: Azzurro & Arancione (Mantenuta) */
+    --bg-dark-primary: #111827;    --bg-dark-secondary: #1f2937;  --bg-dark-tertiary: #374151;
+    --border-color: #4b5563;      --text-primary: #f0f8ff;       --text-secondary: #a0aec0;
+    --accent-azure-primary: #3b82f6; --accent-azure-light: #60a5fa;   --accent-azure-dark: #2563eb;
+    --azure-gradient: linear-gradient(135deg, var(--accent-azure-primary), var(--accent-azure-light));
+    --accent-orange-primary: #f97316; --accent-orange-light: #fb923c;  --accent-orange-dark: #ea580c;
+    --orange-gradient: linear-gradient(135deg, var(--accent-orange-primary), var(--accent-orange-light));
+    --shadow-color-azure: rgba(59, 130, 246, 0.15); --shadow-color-dark: rgba(0, 0, 0, 0.4);
+    /* Font, Spaziatura, Bordi (Invariati) */
+    --font-primary: 'Poppins', sans-serif; --font-size-base: 16px; --line-height-base: 1.7;
+    --spacing-xs: 0.25rem; --spacing-sm: 0.5rem; --spacing-md: 1rem; --spacing-lg: 1.5rem; --spacing-xl: 2.5rem; --spacing-xxl: 4rem;
+    --border-radius-sm: 4px; --border-radius-md: 8px; --border-radius-lg: 16px;
+    /* Transizioni Standard e Sicure */
+    --transition-fast: 0.2s ease-in-out;
+    --transition-medium: 0.3s ease-in-out;
+    --transition-slow: 0.4s ease-out; /* Usiamo ease-out per un rallentamento finale */
 }
-
-html {
-    scroll-behavior: smooth;
-}
-
+html { scroll-behavior: smooth; font-size: var(--font-size-base); }
 body {
-    font-family: 'Poppins', sans-serif;
-    background-color: var(--bg-dark);
-    color: var(--text-primary);
-    line-height: 1.7;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    overflow-x: hidden;
-    transition: background-color 0.3s var(--ease-in-out-cubic); /* Transizione per cambi tema futuri */
+    font-family: var(--font-primary); background-color: var(--bg-dark-primary); color: var(--text-primary);
+    line-height: var(--line-height-base); display: flex; flex-direction: column; min-height: 100vh;
+    overflow-x: hidden; transition: background-color var(--transition-medium);
 }
+.visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
 
-/* Header */
-.main-header {
-    background-color: var(--bg-medium);
-    color: var(--text-primary);
-    padding: 1.8rem 2rem;
-    text-align: center;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    border-bottom: 1px solid var(--bg-light);
-}
+/* Header (Senza backdrop-filter) */
+.main-header { background: linear-gradient(180deg, rgba(31, 41, 55, 0.95) 0%, rgba(17, 24, 39, 0.85) 100%); padding: var(--spacing-lg) var(--spacing-md); text-align: center; border-bottom: 1px solid var(--border-color); position: sticky; top: 0; z-index: 100; }
+.header-content { max-width: 1200px; margin: 0 auto; }
+#main-title { font-weight: 600; font-size: 1.75rem; letter-spacing: 1px; background: var(--azure-gradient); -webkit-background-clip: text; background-clip: text; color: transparent; filter: brightness(1.1); }
 
-#main-title {
-    font-weight: 600;
-    font-size: 1.8rem;
-    letter-spacing: 1px;
-}
+/* Area Contenuto Principale */
+.content-area { flex-grow: 1; padding: var(--spacing-xl) var(--spacing-md); position: relative; width: 100%; transition: min-height var(--transition-medium); }
 
-/* Main Content Area */
-.content-area {
-    flex-grow: 1;
-    padding: 3rem 2rem; /* Aumentato padding */
-    position: relative;
-    width: 100%;
-    overflow: hidden; /* Nasconde contenuto durante transizione viste */
-}
-
-/* Stile delle Viste */
+/* --- Transizioni tra Viste Standard (Slide/Fade) --- */
 .view {
-    width: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    padding: 0 2rem 3rem 2rem; /* Padding interno alla vista */
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(30px); /* Leggermente dal basso */
-    transition: opacity 0.6s var(--ease-out-cubic), transform 0.6s var(--ease-out-cubic), visibility 0s linear 0.6s;
-    will-change: opacity, transform; /* Ottimizzazione animazione */
+    width: 100%; position: absolute; top: 0; left: 0;
+    padding: var(--spacing-xl) var(--spacing-md);
+    opacity: 0; visibility: hidden;
+    transform: translateY(15px);
+    /* Usa --transition-slow (0.4s ease-out) */
+    transition: opacity var(--transition-slow), transform var(--transition-slow), visibility 0s linear var(--transition-slow);
+    will-change: opacity, transform;
 }
-
 .view.active {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-    position: relative; /* Occupa lo spazio */
-    transition: opacity 0.6s var(--ease-out-cubic), transform 0.6s var(--ease-out-cubic), visibility 0s linear 0s;
+    opacity: 1; visibility: visible; transform: translateY(0); position: relative;
+    /* Usa la stessa transizione */
+    transition: opacity var(--transition-slow), transform var(--transition-slow), visibility 0s linear 0s;
 }
+.view-content { max-width: 1100px; margin: 0 auto; }
 
-.view-content {
-    max-width: 1100px; /* Larghezza massima contenuto */
-    margin: 0 auto;   /* Centra il contenuto */
-}
+/* Messaggio di Caricamento */
+.loading-message { text-align: center; color: var(--text-secondary); padding: var(--spacing-xxl) 0; font-style: italic; }
 
-/* Vista Cartelle */
-.folder-grid {
-    display: grid;
-    /* Cartelle più grandi e responsive */
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 2rem; /* Aumentato spazio */
-}
-
+/* Vista Cartelle (Hover Semplificato) */
+.folder-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: var(--spacing-lg); }
 .folder-item {
-    background-color: var(--bg-medium);
-    border: 1px solid var(--bg-light);
-    border-radius: 10px; /* Bordi più arrotondati */
-    padding: 2rem 1.5rem; /* Aumentato padding interno */
-    text-align: center;
-    cursor: pointer;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s var(--ease-out-cubic), box-shadow 0.3s var(--ease-out-cubic), background-color 0.3s var(--ease-in-out-cubic);
-    position: relative;
-    overflow: hidden; /* Per eventuali effetti interni */
+    background-color: var(--bg-dark-secondary); border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-lg); padding: var(--spacing-xl) var(--spacing-lg);
+    text-align: center; cursor: pointer; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: transform var(--transition-medium), box-shadow var(--transition-medium), border-color var(--transition-medium);
+    position: relative; overflow: hidden;
 }
+.folder-item:hover { transform: translateY(-6px); box-shadow: 0 10px 20px var(--shadow-color-dark); border-color: var(--accent-azure-primary); }
+.folder-item h3 { font-size: 1.25rem; font-weight: 500; color: var(--text-primary); margin: 0; position: relative; z-index: 1; transition: color var(--transition-fast); }
+.folder-item:hover h3 { color: var(--accent-azure-light); }
 
-/* Effetto hover moderno per cartelle */
-.folder-item:hover {
-    transform: translateY(-8px) scale(1.03); /* Sollevamento più accentuato */
-    box-shadow: 0 12px 25px var(--shadow-color-darker); /* Ombra più profonda */
-    background-color: var(--bg-light);
-    border-color: var(--accent-blue); /* Bordo colorato su hover */
-}
-
-.folder-item h3 {
-    font-size: 1.2rem; /* Aumentata dimensione font */
-    font-weight: 400;
-    color: var(--text-primary);
-    margin: 0;
-    transition: color 0.3s ease;
-}
-
-.folder-item:hover h3 {
-    color: var(--accent-blue); /* Cambia colore testo su hover */
-}
+/* Vista Galleria (Hover Semplificato) */
+#gallery-view .view-content { max-width: 1200px; }
+.gallery-header { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: var(--spacing-md); margin-bottom: var(--spacing-xl); border-bottom: 1px solid var(--border-color); padding-bottom: var(--spacing-lg); }
+.button-styled { background: transparent; color: var(--accent-azure-light); border: 1px solid var(--accent-azure-primary); padding: var(--spacing-sm) var(--spacing-lg); border-radius: var(--border-radius-md); cursor: pointer; font-size: 0.9rem; font-weight: 500; transition: all var(--transition-fast); display: inline-flex; align-items: center; gap: var(--spacing-sm); }
+.button-styled:hover, .button-styled:focus { background: var(--azure-gradient); color: #ffffff; border-color: transparent; transform: translateY(-2px); box-shadow: 0 4px 15px var(--shadow-color-azure); outline: none; }
+#gallery-title { color: var(--text-primary); font-weight: 600; font-size: 1.8rem; flex-grow: 1; text-align: right; }
+.photo-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: var(--spacing-lg); }
+.photo-item-container { border-radius: var(--border-radius-md); overflow: hidden; background-color: var(--bg-dark-secondary); box-shadow: 0 2px 8px rgba(0,0,0, 0.3); transition: box-shadow var(--transition-medium); }
+.photo-item-container:hover { box-shadow: 0 6px 15px var(--shadow-color-dark); }
+.photo-item { display: block; width: 100%; height: auto; aspect-ratio: 1 / 1; object-fit: cover; cursor: pointer; transition: transform var(--transition-medium), filter var(--transition-fast); will-change: transform; filter: brightness(1); }
+.photo-item-container:hover .photo-item { transform: scale(1.05); filter: brightness(1.1); }
 
 
-/* Vista Galleria */
-#gallery-view .view-content {
-    max-width: 1200px; /* Galleria può essere più larga */
-}
-
-.gallery-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between; /* Spinge titolo a destra */
-    margin-bottom: 2.5rem; /* Aumentato margine */
-    border-bottom: 1px solid var(--bg-light);
-    padding-bottom: 1rem;
-}
-
-/* Stile Bottone Indietro */
-.button-styled {
-    background-color: transparent;
-    color: var(--accent-blue);
-    border: 1px solid var(--accent-blue);
-    padding: 0.7rem 1.5rem;
-    border-radius: 20px; /* Bottone arrotondato */
-    cursor: pointer;
-    font-size: 0.9rem;
-    font-weight: 600;
-    transition: all 0.3s var(--ease-in-out-cubic);
-}
-
-.button-styled:hover {
-    background-color: var(--accent-blue);
-    color: var(--bg-dark);
-    border-color: var(--accent-blue);
-    transform: scale(1.05);
-    box-shadow: 0 4px 15px rgba(66, 153, 225, 0.3);
-}
-
-#gallery-title {
-    color: var(--text-primary);
-    font-weight: 600;
-    font-size: 1.6rem; /* Titolo galleria più grande */
-}
-
-.photo-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); /* Griglia foto leggermente più grande */
-    gap: 1.5rem; /* Aumentato spazio */
-}
-
-.photo-item {
-    width: 100%;
-    aspect-ratio: 1 / 1;
-    object-fit: cover;
-    border-radius: 8px;
-    border: 2px solid transparent; /* Bordo trasparente per non far saltare layout su hover */
-    background-color: var(--bg-medium);
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    cursor: zoom-in;
-    transition: transform 0.3s var(--ease-out-cubic), box-shadow 0.3s var(--ease-out-cubic), border-color 0.3s ease, filter 0.3s ease;
-    filter: brightness(0.95); /* Leggermente più scure di base */
-}
-
-.photo-item:hover {
-     transform: scale(1.05);
-     box-shadow: 0 8px 15px var(--shadow-color-darker);
-     border-color: var(--accent-blue);
-     filter: brightness(1.1); /* Più luminose su hover */
-}
-
-/* --- Stili Lightbox --- */
+/* --- Stili Lightbox con Transizioni Semplificate e Sicure --- */
 .lightbox-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(15, 23, 42, 0.9); /* Sfondo overlay più scuro e desaturato */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-    padding: 20px;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.5s var(--ease-in-out-cubic), visibility 0s linear 0.5s;
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background-color: rgba(10, 10, 20, 0.92);
+    display: flex; justify-content: center; align-items: center;
+    z-index: 1000; padding: var(--spacing-md);
+    opacity: 0; visibility: hidden;
+    /* Transizione standard per lo sfondo */
+    transition: opacity var(--transition-medium) ease-in-out, visibility 0s linear var(--transition-medium);
 }
-
 .lightbox-overlay:not(.hidden) {
-    opacity: 1;
-    visibility: visible;
-    transition-delay: 0s;
+    opacity: 1; visibility: visible;
+    transition: opacity var(--transition-medium) ease-in-out, visibility 0s linear 0s;
 }
 
-.lightbox-content {
-    display: block;
-    max-width: 90vw; /* Larghezza max in base alla viewport */
-    max-height: 85vh; /* Altezza max in base alla viewport */
-    object-fit: contain;
-    border-radius: 8px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.7);
-    transform: scale(0.7); /* Parte più piccolo */
+.lightbox-container {
+    position: relative; width: auto; height: auto; max-width: 90vw; max-height: 90vh;
+    display: flex; flex-direction: column; align-items: center;
+    transform: scale(0.9); /* Parte leggermente piccolo */
     opacity: 0;
-    transition: transform 0.5s var(--ease-back-out), opacity 0.4s ease 0.1s; /* Zoom elastico e fade-in ritardato */
+    /* Transizione standard ease-out per un effetto morbido (NON più elastico) */
+    transition: transform var(--transition-slow) ease-out, opacity var(--transition-slow) ease-out;
 }
-
-.lightbox-overlay:not(.hidden) .lightbox-content {
-    transform: scale(1);
+.lightbox-overlay:not(.hidden) .lightbox-container {
+    transform: scale(1); /* Torna alla dimensione normale */
     opacity: 1;
 }
 
-.lightbox-close {
-    position: absolute;
-    top: 20px;
-    right: 30px;
-    color: #fff;
-    background-color: rgba(0,0,0,0.3); /* Sfondo leggero per contrasto */
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 28px;
-    font-weight: normal; /* Meno bold */
-    line-height: 1;
-    cursor: pointer;
-    transition: transform 0.3s var(--ease-out-cubic), background-color 0.3s ease;
-    z-index: 1010;
-}
+/* Stili Lightbox Interni (Invariati dalla versione semplificata) */
+.lightbox-content { display: block; max-width: 100%; max-height: calc(85vh - 80px); object-fit: contain; border-radius: var(--border-radius-md); box-shadow: 0 15px 40px var(--shadow-color-dark); margin-bottom: var(--spacing-md); opacity: 1; transform: none; }
+.lightbox-close { position: absolute; top: -10px; right: -10px; color: var(--text-primary); background-color: var(--bg-dark-tertiary); border: 1px solid var(--border-color); border-radius: 50%; width: 40px; height: 40px; font-size: 24px; font-weight: 300; line-height: 1; cursor: pointer; transition: all var(--transition-fast); z-index: 1010; display: flex; justify-content: center; align-items: center; }
+.lightbox-close:hover { transform: scale(1.1) rotate(90deg); background-color: var(--accent-orange-primary); border-color: var(--accent-orange-dark); color: #ffffff; }
+.lightbox-nav { position: absolute; top: 50%; transform: translateY(-50%); background-color: rgba(31, 41, 55, 0.6); color: var(--text-primary); border: 1px solid var(--border-color); border-radius: 50%; width: 45px; height: 45px; font-size: 22px; cursor: pointer; transition: all var(--transition-fast); z-index: 1005; display: flex; justify-content: center; align-items: center; opacity: 0.7; }
+.lightbox-nav:hover { background-color: var(--accent-azure-primary); border-color: var(--accent-azure-dark); transform: translateY(-50%) scale(1.05); opacity: 1; }
+.lightbox-prev { left: 10px; } .lightbox-next { right: 10px; }
+.lightbox-nav.disabled { opacity: 0.3; cursor: default; pointer-events: none; background-color: var(--bg-dark-tertiary); border-color: var(--border-color); }
+.lightbox-caption { color: var(--text-secondary); font-size: 0.9rem; margin-top: var(--spacing-sm); text-align: center; max-width: 80%; }
+.lightbox-caption:empty { display: none; }
+.lightbox-audio-controls { margin-top: var(--spacing-md); width: 100%; max-width: 400px; }
+#lightbox-audio { width: 100%; filter: invert(95%) sepia(6%) saturate(85%) hue-rotate(180deg) brightness(110%) contrast(95%); }
+#lightbox-audio:not([src]), #lightbox-audio[src=""] { display: none; }
 
-.lightbox-close:hover {
-    transform: scale(1.1) rotate(90deg); /* Rotazione su hover */
-    background-color: rgba(255,0,0,0.7); /* Rosso su hover */
-}
+/* Footer (Invariato) */
+.main-footer { background: var(--bg-dark-secondary); color: var(--text-secondary); text-align: center; padding: var(--spacing-lg) var(--spacing-md); font-size: 0.85rem; margin-top: auto; border-top: 1px solid var(--border-color); }
+.footer-content { max-width: 1200px; margin: 0 auto; }
 
-/* Footer */
-.main-footer {
-    background-color: var(--bg-medium);
-    color: var(--text-secondary);
-    text-align: center;
-    padding: 1.5rem 2rem;
-    font-size: 0.9rem;
-    margin-top: auto;
-    border-top: 1px solid var(--bg-light);
-}
-
-/* Media Queries per Responsività */
-@media (max-width: 768px) {
-    .content-area { padding: 2rem 1rem; }
-    .view { padding: 0 1rem 2rem 1rem; }
-    #main-title { font-size: 1.6rem; }
-    .folder-grid { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; }
-    .photo-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 1rem; }
-    .gallery-header { flex-direction: column; align-items: flex-start; gap: 0.8rem; margin-bottom: 1.5rem;}
-    #gallery-title { font-size: 1.4rem; }
-    .button-styled { padding: 0.6rem 1.2rem; font-size: 0.85rem; }
-    .lightbox-content { max-width: 95vw; max-height: 80vh; }
-    .lightbox-close { width: 35px; height: 35px; font-size: 24px; top: 10px; right: 15px;}
-}
-
-@media (max-width: 480px) {
-     #main-title { font-size: 1.4rem; }
-    .folder-grid { grid-template-columns: 1fr; gap: 1rem; } /* Una colonna su mobile piccolo */
-    .photo-grid { grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 0.8rem; }
-}
+/* Media Queries (Invariate) */
+@media (max-width: 768px) { /* ... */ html { font-size: 15px; } .content-area, .view { padding-left: var(--spacing-sm); padding-right: var(--spacing-sm); } #main-title { font-size: 1.5rem; } .folder-grid { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--spacing-md); } .photo-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: var(--spacing-md); } .gallery-header { justify-content: center; text-align: center; } #gallery-title { text-align: center; font-size: 1.6rem; } .lightbox-container { max-width: 95vw; max-height: 95vh;} .lightbox-content { max-height: calc(80vh - 70px); } .lightbox-nav { width: 40px; height: 40px; font-size: 18px; } .lightbox-prev { left: 5px; } .lightbox-next { right: 5px; } .lightbox-close { width: 35px; height: 35px; font-size: 20px; top: -5px; right: -5px;} }
+@media (max-width: 480px) { /* ... */ html { font-size: 14px; } .folder-grid { grid-template-columns: 1fr; gap: var(--spacing-md); } .photo-grid { grid-template-columns: repeat(2, 1fr); gap: var(--spacing-sm); } #main-title { font-size: 1.3rem; } }

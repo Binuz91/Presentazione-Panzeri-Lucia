@@ -3,42 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Presentazione Progetto Laurea</title> <link rel="stylesheet" href="css/style.css">
+    <title>Esplorare, creare, sperimentare:</title> <link rel="stylesheet" href="css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-</head>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    </head>
 <body>
 
     <header class="main-header">
-        <h1 id="main-title">TITOLO TESI</h1>
-        </header>
+        <div class="header-content">
+             <h1 id="main-title">Esplorare, creare, sperimentare: Tutto è arte</h1>
+        </div>
+    </header>
 
     <main class="content-area">
-        <section id="folder-view" class="view active">
-            <div class="view-content"> <div class="folder-grid">
-                    </div>
+        <section id="folder-view" class="view active" aria-labelledby="folder-view-title">
+            <div class="view-content">
+                <h2 id="folder-view-title" class="visually-hidden">Selezione Cartelle Progetti</h2> <div class="folder-grid">
+                    <p class="loading-message">Caricamento progetti...</p>
+                </div>
             </div>
         </section>
 
-        <section id="gallery-view" class="view">
-             <div class="view-content"> <div class="gallery-header">
-                     <button id="back-button" class="button-styled">&larr; Indietro</button> <h2 id="gallery-title">Nome Cartella</h2>
+        <section id="gallery-view" class="view" aria-labelledby="gallery-title">
+             <div class="view-content">
+                 <div class="gallery-header">
+                     <button id="back-button" class="button-styled" aria-label="Torna alla selezione cartelle">
+                         &larr; Indietro
+                     </button>
+                     <h2 id="gallery-title">Nome Cartella</h2>
                 </div>
                 <div class="photo-grid">
-                    </div>
+                    <p class="loading-message">Caricamento immagini...</p>
+                </div>
             </div>
         </section>
     </main>
 
-    <div id="lightbox" class="lightbox-overlay hidden">
-        <span class="lightbox-close">&times;</span>
-        <img class="lightbox-content" src="#" alt="Immagine ingrandita">
+    <div id="lightbox" class="lightbox-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="lightbox-caption">
+        <button class="lightbox-close" aria-label="Chiudi visualizzazione immagine">&times;</button>
+        <button class="lightbox-nav lightbox-prev" aria-label="Immagine precedente">&lt;</button>
+        <button class="lightbox-nav lightbox-next" aria-label="Immagine successiva">&gt;</button>
+        <div class="lightbox-container">
+            <img class="lightbox-content" src="#" alt="Immagine ingrandita">
+            <div id="lightbox-caption" class="lightbox-caption">Didascalia immagine</div>
+            <div class="lightbox-audio-controls">
+                <audio id="lightbox-audio" controls></audio>
+            </div>
+        </div>
     </div>
 
     <footer class="main-footer">
-        <p>Presentazione Progetto di Laurea - [Il tuo Nome] - Università [Nome Università] - [Anno]</p>
-        </footer>
+        <div class="footer-content">
+            <p>Progetto di Tesi &copy; <span id="current-year"></span> - Panzeri Lucia - Università degli Studi Bicocca di Milano</p>
+            </div>
+    </footer>
 
     <script src="js/script.js"></script>
 </body>
