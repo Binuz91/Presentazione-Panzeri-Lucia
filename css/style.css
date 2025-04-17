@@ -50,7 +50,7 @@ html { scroll-behavior: smooth; font-size: var(--font-size-base); }
 body {
     font-family: var(--font-primary);
     background-color: var(--bg-dark-primary);
-    background-image: linear-gradient(to right, var(--bg-dark-primary) 0%, var(--accent-azure-primary) 50%, var(--bg-dark-primary) 100%);
+    background-image: linear-gradient(to right, var(--bg-dark-primary) 2%, var(--accent-azure-primary) 49%, var(--accent-azure-primary) 51%, var(--bg-dark-primary) 98%);
     color: var(--text-primary);
     line-height: var(--line-height-base);
     display: flex;
