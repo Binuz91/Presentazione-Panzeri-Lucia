@@ -27,12 +27,12 @@
     --font-primary: 'Poppins', sans-serif;
     --font-size-base: 16px;
     --line-height-base: 1.7;
-    --spacing-xs: 0.25rem;
-    --spacing-sm: 0.5rem;
-    --spacing-md: 1rem;
-    --spacing-lg: 1.5rem;
-    --spacing-xl: 2.5rem;
-    --spacing-xxl: 4rem;
+    --spacing-xs: 0.25rem; /* 4px */
+    --spacing-sm: 0.5rem;  /* 8px */
+    --spacing-md: 1rem;   /* 16px */
+    --spacing-lg: 1.5rem;  /* 24px */
+    --spacing-xl: 2.5rem;  /* 40px */
+    --spacing-xxl: 4rem;   /* 64px */
     --border-radius-sm: 4px;
     --border-radius-md: 8px;
     --border-radius-lg: 16px;
@@ -44,6 +44,8 @@
     --transition-tilt: 0.05s linear;
     /* Altezza approssimativa header per posizionamento bottone */
     --header-height-approx: 6rem; /* Regola questo valore se necessario */
+    /* Altezza approssimativa bottone indietro + margine per calcolo padding */
+    --back-button-clearance: 70px; /* Era 50px, aumentato per più spazio */
 }
 
 html {
@@ -84,7 +86,6 @@ body {
     position: sticky;
     top: 0;
     z-index: 100;
-    /* Altezza minima per riferimento, potrebbe essere dinamica */
     min-height: var(--header-height-approx);
 }
 
@@ -111,27 +112,22 @@ body {
     padding-bottom: var(--spacing-xl);
     padding-left: var(--spacing-md);
     padding-right: var(--spacing-md);
-    position: relative; /* Mantenuto per altri elementi se necessario */
+    position: relative;
     width: 100%;
     transition: min-height var(--transition-medium);
 }
 
 /* Stile Contenitore Pulsante Indietro */
 .back-button-container {
-    /* --- MODIFICATO: Usa position: fixed --- */
     position: fixed;
-    /* Posiziona sotto l'header (usa variabile --header-height-approx) */
-    top: calc(var(--header-height-approx) + var(--spacing-md)); /* Aggiunge un po' di spazio sotto l'header */
     left: var(--spacing-md);
-    z-index: 10; /* Assicurati sia sopra il contenuto ma sotto la lightbox */
-    /* Nascondi per default */
+    top: calc(var(--header-height-approx) + var(--spacing-md));
+    z-index: 10;
     display: none;
 }
 
-/* Mostra il bottone quando .content-area ha la classe .gallery-active */
 main.content-area.gallery-active .back-button-container {
-    display: block; /* O inline-block/inline-flex */
-    /* Rimosso bordo rosso di debug */
+    display: block;
 }
 
 
@@ -152,12 +148,15 @@ main.content-area.gallery-active .back-button-container {
 }
 
 .view-content {
-    max-width: 1100px;
     margin: 0 auto;
-    /* Aggiungi padding sopra per evitare che il contenuto vada sotto il bottone fisso */
-    /* Il valore deve essere sufficiente a coprire l'altezza del bottone + il suo spazio `top` */
-    padding-top: calc(var(--header-height-approx) + var(--spacing-md) + 50px); /* 50px è un'ipotesi per l'altezza del bottone+margine */
+    /* Aggiunto padding sopra per evitare sovrapposizione con bottone fisso */
+    /* Usa la variabile --back-button-clearance */
+    padding-top: calc(var(--header-height-approx) + var(--spacing-md) + var(--back-button-clearance));
     padding-bottom: var(--spacing-xl);
+}
+
+#folder-view .view-content {
+    max-width: 1400px;
 }
 
 #gallery-view .view-content {
@@ -173,7 +172,7 @@ main.content-area.gallery-active .back-button-container {
     font-style: italic;
 }
 
-/* Folder Grid */
+/* Folder Grid (5 Colonne) */
 .folder-grid {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
@@ -181,11 +180,12 @@ main.content-area.gallery-active .back-button-container {
     perspective: 1000px;
 }
 
+/* Pulsante Cartella Ingrandito */
 .folder-item {
     background-color: var(--bg-dark-secondary);
     border: 1px solid var(--border-color);
     border-radius: var(--border-radius-lg);
-    padding: var(--spacing-xl) var(--spacing-lg);
+    padding: var(--spacing-xxl) var(--spacing-xl);
     text-align: center;
     cursor: pointer;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
@@ -194,6 +194,7 @@ main.content-area.gallery-active .back-button-container {
     overflow: hidden;
     transform-style: preserve-3d;
     will-change: transform;
+    min-height: 180px;
 }
 
 .folder-item:hover {
@@ -201,8 +202,9 @@ main.content-area.gallery-active .back-button-container {
     border-color: var(--accent-azure-primary);
 }
 
+/* Titolo Cartella Ingrandito */
 .folder-item h3 {
-    font-size: 1.25rem;
+    font-size: 1.6rem;
     font-weight: 600;
     color: var(--text-primary);
     margin: 0;
@@ -224,17 +226,18 @@ main.content-area.gallery-active .back-button-container {
     margin-bottom: var(--spacing-xl);
     border-bottom: 1px solid var(--border-color);
     padding-bottom: var(--spacing-lg);
-    /* Rimosso padding-top aggiunto prima per errore */
 }
 
+/* --- MODIFICATO: Pulsante Indietro Ingrandito --- */
 .button-styled {
     background: transparent;
     color: var(--accent-azure-light);
     border: 1px solid var(--accent-azure-primary);
-    padding: var(--spacing-sm) var(--spacing-lg);
+    /* Aumentato padding e font-size */
+    padding: var(--spacing-md) var(--spacing-lg); /* Era sm, lg -> 16px 24px */
     border-radius: var(--border-radius-md);
     cursor: pointer;
-    font-size: 0.9rem;
+    font-size: 1rem; /* Era 0.9rem */
     font-weight: 600;
     transition: all var(--transition-fast);
     display: inline-flex;
@@ -295,12 +298,34 @@ main.content-area.gallery-active .back-button-container {
 .footer-content { max-width: 1200px; margin: 0 auto; }
 
 /* Media Queries */
-@media (max-width: 768px) {
+@media (max-width: 768px) { /* Passa a 3 colonne */
      html { font-size: 15px; }
      .content-area { padding-left: var(--spacing-sm); padding-right: var(--spacing-sm); }
      .back-button-container { left: var(--spacing-sm); }
+     /* --- MODIFICATO: Aumenta spazio sopra contenuto per bottone indietro su mobile --- */
+     .view-content {
+         /* Aumenta il valore --back-button-clearance se necessario */
+         padding-top: calc(var(--header-height-approx) + var(--spacing-md) + var(--back-button-clearance) + 10px); /* Aggiunti 10px extra */
+     }
+      /* Adatta dimensione bottone indietro su mobile se necessario */
+     .button-styled {
+        /* Potresti ridurre leggermente padding/font qui se troppo grande */
+        /* font-size: 0.9rem; */
+        /* padding: var(--spacing-sm) var(--spacing-md); */
+     }
+
      #main-title { font-size: 1.5rem; }
-     .folder-grid { grid-template-columns: repeat(3, 1fr); }
+     .folder-grid {
+         grid-template-columns: repeat(3, 1fr);
+         gap: var(--spacing-lg);
+     }
+     .folder-item {
+         padding: var(--spacing-xl) var(--spacing-lg);
+         min-height: 160px;
+     }
+     .folder-item h3 {
+         font-size: 1.4rem;
+     }
      .photo-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: var(--spacing-md); }
      #gallery-title { text-align: center; font-size: 1.6rem; }
      .lightbox-container { max-width: 95vw; max-height: 95vh;}
@@ -310,11 +335,25 @@ main.content-area.gallery-active .back-button-container {
      .lightbox-close { width: 35px; height: 35px; font-size: 20px; top: -5px; right: -5px;}
 }
 
-@media (max-width: 480px) {
+@media (max-width: 480px) { /* Passa a 2 colonne */
      html { font-size: 14px; }
-     .folder-grid { grid-template-columns: repeat(2, 1fr); gap: var(--spacing-md); }
+     /* --- MODIFICATO: Aumenta spazio sopra contenuto per bottone indietro su mobile piccolo --- */
+     .view-content {
+         /* Aumenta ulteriormente se necessario */
+         padding-top: calc(var(--header-height-approx) + var(--spacing-md) + var(--back-button-clearance) + 15px); /* Aggiunti 15px extra */
+     }
+     .folder-grid {
+         grid-template-columns: repeat(2, 1fr);
+         gap: var(--spacing-md);
+     }
+      .folder-item {
+         padding: var(--spacing-lg) var(--spacing-md);
+         min-height: 120px;
+     }
+     .folder-item h3 {
+         font-size: 1.1rem;
+     }
      .photo-grid { grid-template-columns: repeat(2, 1fr); gap: var(--spacing-sm); }
       #main-title { font-size: 1.3rem; }
-      .folder-item h3 { font-size: 1.1rem; }
       .folder-grid { perspective: 1500px; }
 }
