@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Esplorare, creare, sperimentare:</title> <link rel="stylesheet" href="css/style.css">
+    <title>Esplorare, creare, sperimentare:</title>
+    <link rel="stylesheet" href="css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    </head>
+</head>
 <body>
 
     <header class="main-header">
@@ -17,9 +18,16 @@
     </header>
 
     <main class="content-area">
+        <div class="back-button-container">
+             <button id="back-button" class="button-styled" aria-label="Torna alla selezione cartelle">
+                 &larr; Indietro
+             </button>
+        </div>
+
         <section id="folder-view" class="view active" aria-labelledby="folder-view-title">
             <div class="view-content">
-                <h2 id="folder-view-title" class="visually-hidden">Selezione Cartelle Progetti</h2> <div class="folder-grid">
+                <h2 id="folder-view-title" class="visually-hidden">Selezione Cartelle Progetti</h2>
+                <div class="folder-grid">
                     <p class="loading-message">Caricamento progetti...</p>
                 </div>
             </div>
@@ -28,9 +36,6 @@
         <section id="gallery-view" class="view" aria-labelledby="gallery-title">
              <div class="view-content">
                  <div class="gallery-header">
-                     <button id="back-button" class="button-styled" aria-label="Torna alla selezione cartelle">
-                         &larr; Indietro
-                     </button>
                      <h2 id="gallery-title">Nome Cartella</h2>
                 </div>
                 <div class="photo-grid">
@@ -56,7 +61,7 @@
     <footer class="main-footer">
         <div class="footer-content">
             <p>Progetto di Tesi &copy; <span id="current-year"></span> - Panzeri Lucia - Università degli Studi Bicocca di Milano</p>
-            </div>
+        </div>
     </footer>
 
     <script src="js/script.js"></script>

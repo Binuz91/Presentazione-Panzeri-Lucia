@@ -41,7 +41,9 @@
     --transition-medium: 0.3s ease-in-out;
     --transition-slow: 0.4s ease-out;
     /* Aggiunta per l'effetto tilt */
-    --transition-tilt: 0.1s linear; /* Transizione più reattiva per il tilt */
+    --transition-tilt: 0.05s linear;
+    /* Altezza approssimativa header per posizionamento bottone */
+    --header-height-approx: 6rem; /* Regola questo valore se necessario */
 }
 
 html {
@@ -82,6 +84,8 @@ body {
     position: sticky;
     top: 0;
     z-index: 100;
+    /* Altezza minima per riferimento, potrebbe essere dinamica */
+    min-height: var(--header-height-approx);
 }
 
 .header-content {
@@ -103,38 +107,63 @@ body {
 /* Area Contenuto Principale */
 .content-area {
     flex-grow: 1;
-    padding: var(--spacing-xl) var(--spacing-md);
-    position: relative;
+    padding-top: var(--spacing-xl);
+    padding-bottom: var(--spacing-xl);
+    padding-left: var(--spacing-md);
+    padding-right: var(--spacing-md);
+    position: relative; /* Mantenuto per altri elementi se necessario */
     width: 100%;
     transition: min-height var(--transition-medium);
 }
 
+/* Stile Contenitore Pulsante Indietro */
+.back-button-container {
+    /* --- MODIFICATO: Usa position: fixed --- */
+    position: fixed;
+    /* Posiziona sotto l'header (usa variabile --header-height-approx) */
+    top: calc(var(--header-height-approx) + var(--spacing-md)); /* Aggiunge un po' di spazio sotto l'header */
+    left: var(--spacing-md);
+    z-index: 10; /* Assicurati sia sopra il contenuto ma sotto la lightbox */
+    /* Nascondi per default */
+    display: none;
+}
+
+/* Mostra il bottone quando .content-area ha la classe .gallery-active */
+main.content-area.gallery-active .back-button-container {
+    display: block; /* O inline-block/inline-flex */
+    /* Rimosso bordo rosso di debug */
+}
+
+
 /* Transizioni tra Viste */
 .view {
     width: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    padding: var(--spacing-xl) var(--spacing-md);
     opacity: 0;
-    visibility: hidden;
     transform: translateY(15px);
-    transition: opacity var(--transition-slow), transform var(--transition-slow), visibility 0s linear var(--transition-slow);
+    transition: opacity var(--transition-slow), transform var(--transition-slow);
     will-change: opacity, transform;
+    display: none;
 }
 
 .view.active {
     opacity: 1;
-    visibility: visible;
     transform: translateY(0);
-    position: relative;
-    transition: opacity var(--transition-slow), transform var(--transition-slow), visibility 0s linear 0s;
+    display: block;
 }
 
 .view-content {
     max-width: 1100px;
     margin: 0 auto;
+    /* Aggiungi padding sopra per evitare che il contenuto vada sotto il bottone fisso */
+    /* Il valore deve essere sufficiente a coprire l'altezza del bottone + il suo spazio `top` */
+    padding-top: calc(var(--header-height-approx) + var(--spacing-md) + 50px); /* 50px è un'ipotesi per l'altezza del bottone+margine */
+    padding-bottom: var(--spacing-xl);
 }
+
+#gallery-view .view-content {
+    max-width: 1200px;
+}
+
 
 /* Messaggio di Caricamento */
 .loading-message {
@@ -144,12 +173,11 @@ body {
     font-style: italic;
 }
 
-/* Folder Grid (5 colonne) */
+/* Folder Grid */
 .folder-grid {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     gap: var(--spacing-lg);
-    /* Aggiunta perspective per effetto 3D */
     perspective: 1000px;
 }
 
@@ -161,22 +189,18 @@ body {
     text-align: center;
     cursor: pointer;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    /* Aggiornata transition per includere transform */
     transition: transform var(--transition-tilt), box-shadow var(--transition-medium), border-color var(--transition-medium);
     position: relative;
     overflow: hidden;
-    /* Necessario per contenere elementi trasformati 3D */
     transform-style: preserve-3d;
-    will-change: transform; /* Ottimizzazione performance */
+    will-change: transform;
 }
 
 .folder-item:hover {
-    /* Rimosso transform: translateY(-6px); per non interferire con il tilt */
     box-shadow: 0 10px 20px var(--shadow-color-dark);
     border-color: var(--accent-azure-primary);
 }
 
-/* Titolo Cartella */
 .folder-item h3 {
     font-size: 1.25rem;
     font-weight: 600;
@@ -187,28 +211,59 @@ body {
     transition: color var(--transition-fast);
     line-height: 1.4;
     word-wrap: break-word;
-    /* Aggiunta per evitare che il testo esca durante la rotazione */
-    transform: translateZ(20px); /* Sposta leggermente il testo in avanti */
+    transform: translateZ(20px);
 }
-
 
 .folder-item:hover h3 {
     color: var(--accent-azure-light);
 }
 
 /* Vista Galleria */
-#gallery-view .view-content { max-width: 1200px; }
-.gallery-header { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: var(--spacing-md); margin-bottom: var(--spacing-xl); border-bottom: 1px solid var(--border-color); padding-bottom: var(--spacing-lg); }
-.button-styled { background: transparent; color: var(--accent-azure-light); border: 1px solid var(--accent-azure-primary); padding: var(--spacing-sm) var(--spacing-lg); border-radius: var(--border-radius-md); cursor: pointer; font-size: 0.9rem; font-weight: 600; transition: all var(--transition-fast); display: inline-flex; align-items: center; gap: var(--spacing-sm); }
-.button-styled:hover, .button-styled:focus { background: var(--azure-gradient); color: #ffffff; border-color: transparent; transform: translateY(-2px); box-shadow: 0 4px 15px var(--shadow-color-azure); outline: none; }
-#gallery-title { color: var(--text-primary); font-weight: 600; font-size: 1.8rem; flex-grow: 1; text-align: right; }
+.gallery-header {
+    text-align: right;
+    margin-bottom: var(--spacing-xl);
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: var(--spacing-lg);
+    /* Rimosso padding-top aggiunto prima per errore */
+}
+
+.button-styled {
+    background: transparent;
+    color: var(--accent-azure-light);
+    border: 1px solid var(--accent-azure-primary);
+    padding: var(--spacing-sm) var(--spacing-lg);
+    border-radius: var(--border-radius-md);
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: all var(--transition-fast);
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+.button-styled:hover, .button-styled:focus {
+    background: var(--azure-gradient);
+    color: #ffffff;
+    border-color: transparent;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px var(--shadow-color-azure);
+    outline: none;
+}
+
+#gallery-title {
+    color: var(--text-primary);
+    font-weight: 600;
+    font-size: 1.8rem;
+}
+
 .photo-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: var(--spacing-lg); }
 .photo-item-container { border-radius: var(--border-radius-md); overflow: hidden; background-color: var(--bg-dark-secondary); box-shadow: 0 2px 8px rgba(0,0,0, 0.3); transition: box-shadow var(--transition-medium); }
 .photo-item-container:hover { box-shadow: 0 6px 15px var(--shadow-color-dark); }
 .photo-item { display: block; width: 100%; height: auto; aspect-ratio: 1 / 1; object-fit: cover; cursor: pointer; transition: transform var(--transition-medium), filter var(--transition-fast); will-change: transform; filter: brightness(1); }
 .photo-item-container:hover .photo-item { transform: scale(1.05); filter: brightness(1.1); }
 
-/* Stili Lightbox Semplificati */
+/* Stili Lightbox */
+/* ... (stili lightbox invariati) ... */
 .lightbox-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(10, 10, 20, 0.92); display: flex; justify-content: center; align-items: center; z-index: 1000; padding: var(--spacing-md); opacity: 0; visibility: hidden; transition: opacity var(--transition-medium) ease-in-out, visibility 0s linear var(--transition-medium); }
 .lightbox-overlay:not(.hidden) { opacity: 1; visibility: visible; transition: opacity var(--transition-medium) ease-in-out, visibility 0s linear 0s; }
 .lightbox-container { position: relative; width: auto; height: auto; max-width: 90vw; max-height: 90vh; display: flex; flex-direction: column; align-items: center; transform: scale(0.9); opacity: 0; transition: transform var(--transition-slow) ease-out, opacity var(--transition-slow) ease-out; }
@@ -226,19 +281,27 @@ body {
 #lightbox-audio { width: 100%; filter: invert(95%) sepia(6%) saturate(85%) hue-rotate(180deg) brightness(110%) contrast(95%); }
 #lightbox-audio:not([src]), #lightbox-audio[src=""] { display: none; }
 
+
 /* Footer */
-.main-footer { background: var(--bg-dark-secondary); color: var(--text-secondary); text-align: center; padding: var(--spacing-lg) var(--spacing-md); font-size: 0.85rem; margin-top: auto; border-top: 1px solid var(--border-color); }
+.main-footer {
+    background: var(--bg-dark-secondary);
+    color: var(--text-secondary);
+    text-align: center;
+    padding: var(--spacing-lg) var(--spacing-md);
+    font-size: 0.85rem;
+    border-top: 1px solid var(--border-color);
+    flex-shrink: 0;
+}
 .footer-content { max-width: 1200px; margin: 0 auto; }
 
-/* Media Queries (Con modifica per folder-grid) */
+/* Media Queries */
 @media (max-width: 768px) {
      html { font-size: 15px; }
-     .content-area, .view { padding-left: var(--spacing-sm); padding-right: var(--spacing-sm); }
+     .content-area { padding-left: var(--spacing-sm); padding-right: var(--spacing-sm); }
+     .back-button-container { left: var(--spacing-sm); }
      #main-title { font-size: 1.5rem; }
-     /* Su tablet, 3 colonne */
      .folder-grid { grid-template-columns: repeat(3, 1fr); }
      .photo-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: var(--spacing-md); }
-     .gallery-header { justify-content: center; text-align: center; }
      #gallery-title { text-align: center; font-size: 1.6rem; }
      .lightbox-container { max-width: 95vw; max-height: 95vh;}
      .lightbox-content { max-height: calc(80vh - 70px); }
@@ -249,13 +312,9 @@ body {
 
 @media (max-width: 480px) {
      html { font-size: 14px; }
-     /* Su mobile piccolo, 2 colonne */
      .folder-grid { grid-template-columns: repeat(2, 1fr); gap: var(--spacing-md); }
      .photo-grid { grid-template-columns: repeat(2, 1fr); gap: var(--spacing-sm); }
       #main-title { font-size: 1.3rem; }
-      /* Riduci leggermente font titolo cartella su mobile */
       .folder-item h3 { font-size: 1.1rem; }
-      /* Riduci perspective su mobile per un effetto meno pronunciato */
       .folder-grid { perspective: 1500px; }
 }
-
