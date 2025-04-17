@@ -2,8 +2,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- CONFIGURAZIONE DATI ---
     console.log("Inizio script.");
+    // --- DATI COMPLETI RIPRISTINATI ---
     const foldersData = [
-        // ... (i tuoi dati delle cartelle rimangono invariati) ...
         {
             name: "Arte che prende forma: La pasta di sale",
             id: "cartella1",
@@ -27,7 +27,18 @@ document.addEventListener('DOMContentLoaded', () => {
             photos: [
                 { image: "images/cartella2/01.webp",  audio: "audio/cartella2/01.mp3" },
                 { image: "images/cartella2/02.webp",  audio: "audio/cartella2/02.mp3" },
-                // ... altre foto ...
+                { image: "images/cartella2/03.webp",  audio: "audio/cartella2/03.mp3" },
+                { image: "images/cartella2/04.webp",  audio: "audio/cartella2/04.mp3" },
+                { image: "images/cartella2/05.webp",  audio: "audio/cartella2/05.mp3" },
+                { image: "images/cartella2/06.webp",  audio: "audio/cartella2/06.mp3" },
+                { image: "images/cartella2/07.webp",  audio: "audio/cartella2/07.mp3" },
+                { image: "images/cartella2/08.webp",  audio: "audio/cartella2/08.mp3" },
+                { image: "images/cartella2/09.webp",  audio: "audio/cartella2/09.mp3" },
+                { image: "images/cartella2/10.webp",  audio: "audio/cartella2/10.mp3" },
+                { image: "images/cartella2/11.webp",  audio: "audio/cartella2/11.mp3" },
+                { image: "images/cartella2/12.webp",  audio: "audio/cartella2/12.mp3" },
+                { image: "images/cartella2/13.webp",  audio: "audio/cartella2/13.mp3" },
+                { image: "images/cartella2/14.webp",  audio: "audio/cartella2/14.mp3" },
                 { image: "images/cartella2/15.webp",  audio: "audio/cartella2/15.mp3" },
                 { image: "images/cartella2/16.webp",  audio: "audio/cartella2/16.mp3" },
             ]
@@ -38,7 +49,18 @@ document.addEventListener('DOMContentLoaded', () => {
             photos: [
                  { image: "images/cartella3/01.webp",     audio: "audio/cartella3/01.mp3" },
                  { image: "images/cartella3/02.webp",     audio: "audio/cartella3/02.mp3" },
-                 // ... altre foto ...
+                 { image: "images/cartella3/03.webp",     audio: "audio/cartella3/03.mp3" },
+                 { image: "images/cartella3/04.webp",     audio: "audio/cartella3/04.mp3" },
+                 { image: "images/cartella3/05.webp",     audio: "audio/cartella3/05.mp3" },
+                 { image: "images/cartella3/06.webp",     audio: "audio/cartella3/06.mp3" },
+                 { image: "images/cartella3/07.webp",     audio: "audio/cartella3/07.mp3" },
+                 { image: "images/cartella3/08.webp",     audio: "audio/cartella3/08.mp3" },
+                 { image: "images/cartella3/09.webp",     audio: "audio/cartella3/09.mp3" },
+                 { image: "images/cartella3/10.webp",     audio: "audio/cartella3/10.mp3" },
+                 { image: "images/cartella3/11.webp",     audio: "audio/cartella3/11.mp3" },
+                 { image: "images/cartella3/12.webp",     audio: "audio/cartella3/12.mp3" },
+                 { image: "images/cartella3/13.webp",     audio: "audio/cartella3/13.mp3" },
+                 { image: "images/cartella3/14.webp",     audio: "audio/cartella3/14.mp3" },
                  { image: "images/cartella3/15.webp",     audio: "audio/cartella3/15.mp3" },
                  { image: "images/cartella3/16.webp",     audio: "audio/cartella3/16.mp3" },
             ]
@@ -48,7 +70,13 @@ document.addEventListener('DOMContentLoaded', () => {
             id: "cartella4",
             photos: [
                 { image: "images/cartella4/1.webp"}, { image: "images/cartella4/2.webp"},
-                 // ... altre foto ...
+                { image: "images/cartella4/3.webp"}, { image: "images/cartella4/4.webp"},
+                { image: "images/cartella4/5.webp"}, { image: "images/cartella4/6.webp"},
+                { image: "images/cartella4/7.webp"}, { image: "images/cartella4/8.webp"},
+                { image: "images/cartella4/9.webp"}, { image: "images/cartella4/10.webp"},
+                { image: "images/cartella4/11.webp"}, { image: "images/cartella4/12.webp"},
+                { image: "images/cartella4/13.webp"}, { image: "images/cartella4/14.webp"},
+                { image: "images/cartella4/15.webp"}, { image: "images/cartella4/16.webp"},
                 { image: "images/cartella4/17.webp"}, { image: "images/cartella4/18.webp"},
             ]
         },
@@ -57,12 +85,13 @@ document.addEventListener('DOMContentLoaded', () => {
             id: "cartella5",
             photos: [
                  { image: "images/cartella5/1.webp"}, { image: "images/cartella5/2.webp"},
-                 // ... altre foto ...
+                 { image: "images/cartella5/3.webp"}, { image: "images/cartella5/4.webp"},
+                 { image: "images/cartella5/5.webp"}, { image: "images/cartella5/6.webp"},
                  { image: "images/cartella5/7.webp"},
             ]
         },
     ];
-    console.log("Dati 'foldersData' caricati.");
+    console.log("Dati 'foldersData' caricati (completi)."); // Log aggiornato
 
     // --- Selezione Elementi DOM ---
     console.log("Selezione elementi DOM...");
@@ -213,16 +242,16 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-    // --- MODIFICATA: Gestisce MouseMove per Tilt, Scala (a 70px) e Z-index ---
+    // --- Gestisce MouseMove con i TUOI valori preferiti ---
     function handleMouseMove(e) {
          if (!isTiltActive) return;
 
          cancelAnimationFrame(tiltRAF);
 
          tiltRAF = requestAnimationFrame(() => {
+            // --- USA I TUOI VALORI ---
             const maxRotation = 20; // Gradi massimi rotazione
-            const maxScale = 1.8; // Scala massima (150%)
-            // --- MODIFICATO: Imposta la distanza di inizio scaling a 70px ---
+            const maxScale = 1.8; // Scala massima (180%)
             const scaleStartDistance = 230; // Distanza (px) a cui inizia lo scaling
 
             let closestItem = null;
@@ -245,16 +274,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 // --- Calcola Scala e Distanza ---
                 const distance = Math.sqrt(mouseX * mouseX + mouseY * mouseY);
                 let scale = 1.0; // Scala di default
-
-                // Applica scaling solo se la distanza è minore della soglia
                 if (distance < scaleStartDistance) {
-                    // Calcola quanto siamo vicini rispetto alla soglia (da 0 a 1)
-                    // 1 = distanza 0 (centro), 0 = distanza >= scaleStartDistance
                     const closenessFactor = 1 - (distance / scaleStartDistance);
-                    // Mappa il fattore di vicinanza alla scala desiderata [1.0, maxScale]
                     scale = 1 + (maxScale - 1) * closenessFactor;
                 }
-                // Assicura che la scala non superi mai maxScale (sicurezza extra)
                 scale = Math.min(scale, maxScale);
 
 
