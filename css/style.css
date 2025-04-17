@@ -40,6 +40,8 @@
     --transition-fast: 0.2s ease-in-out;
     --transition-medium: 0.3s ease-in-out;
     --transition-slow: 0.4s ease-out;
+    /* Aggiunta per l'effetto tilt */
+    --transition-tilt: 0.1s linear; /* Transizione più reattiva per il tilt */
 }
 
 html {
@@ -147,6 +149,8 @@ body {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     gap: var(--spacing-lg);
+    /* Aggiunta perspective per effetto 3D */
+    perspective: 1000px;
 }
 
 .folder-item {
@@ -157,20 +161,22 @@ body {
     text-align: center;
     cursor: pointer;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    transition: transform var(--transition-medium), box-shadow var(--transition-medium), border-color var(--transition-medium);
+    /* Aggiornata transition per includere transform */
+    transition: transform var(--transition-tilt), box-shadow var(--transition-medium), border-color var(--transition-medium);
     position: relative;
     overflow: hidden;
-    /* Aggiunta per flex interno se necessario */
-    /* display: flex; flex-direction: column; justify-content: center; */
+    /* Necessario per contenere elementi trasformati 3D */
+    transform-style: preserve-3d;
+    will-change: transform; /* Ottimizzazione performance */
 }
 
 .folder-item:hover {
-    transform: translateY(-6px);
+    /* Rimosso transform: translateY(-6px); per non interferire con il tilt */
     box-shadow: 0 10px 20px var(--shadow-color-dark);
     border-color: var(--accent-azure-primary);
 }
 
-/* --- MODIFICA Titolo Cartella --- */
+/* Titolo Cartella */
 .folder-item h3 {
     font-size: 1.25rem;
     font-weight: 600;
@@ -179,12 +185,11 @@ body {
     position: relative;
     z-index: 1;
     transition: color var(--transition-fast);
-    /* Rimosso white-space, overflow, text-overflow per permettere wrap */
-    /* Aggiunta per migliorare leggibilità se va a capo */
-     line-height: 1.4;
-     word-wrap: break-word; /* Va a capo anche per parole lunghe se necessario */
+    line-height: 1.4;
+    word-wrap: break-word;
+    /* Aggiunta per evitare che il testo esca durante la rotazione */
+    transform: translateZ(20px); /* Sposta leggermente il testo in avanti */
 }
-/* --- FINE MODIFICA --- */
 
 
 .folder-item:hover h3 {
@@ -250,4 +255,7 @@ body {
       #main-title { font-size: 1.3rem; }
       /* Riduci leggermente font titolo cartella su mobile */
       .folder-item h3 { font-size: 1.1rem; }
+      /* Riduci perspective su mobile per un effetto meno pronunciato */
+      .folder-grid { perspective: 1500px; }
 }
+
