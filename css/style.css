@@ -87,12 +87,12 @@ body {
 /* Stile per il bottone quando è nell'header */
 .header-content .button-styled#gallery-back-button {
     padding: 0 var(--spacing-lg);
-    /* --- MODIFICATO: Aumentato font-size base --- */
-    font-size: 1.1rem; /* Era 0.9rem */
+    font-size: 1.1rem;
     flex-shrink: 0;
     border-top: none;
     border-bottom: none;
     border-radius: 0;
+    /* Il contenuto interno (testo/freccia) viene centrato da .button-styled */
 }
 
 /* Titolo principale (visibile solo in home) */
@@ -107,8 +107,8 @@ body {
     filter: brightness(1.1);
     flex-grow: 1;
     text-align: center;
-    align-self: center;
-    padding: var(--spacing-sm) 0;
+    align-self: center; /* Centra verticalmente anche se header stretcha */
+    padding: var(--spacing-sm) 0; /* Padding verticale per respiro */
 }
 
 /* Stile per il titolo galleria QUANDO è nell'header */
@@ -120,8 +120,8 @@ body {
     text-align: center;
     margin: 0;
     padding: 0;
-    align-self: center;
-    line-height: 1.3;
+    align-self: center; /* Centra verticalmente anche se header stretcha */
+    line-height: 1.3; /* Aiuta se va a capo */
 }
 
 
@@ -134,11 +134,11 @@ body {
 
 .view-content {
     margin: 0 auto;
-    padding-top: var(--spacing-xl);
+    padding-top: var(--spacing-xl); /* Padding standard */
     padding-bottom: var(--spacing-xl);
 }
-#folder-view .view-content { max-width: 1400px; }
-#gallery-view .view-content { max-width: 1200px; }
+#folder-view .view-content { max-width: 1400px; } /* Vista cartelle più larga */
+#gallery-view .view-content { max-width: 1200px; } /* Vista galleria */
 
 /* Messaggio di Caricamento */
 .loading-message { text-align: center; color: var(--text-secondary); padding: var(--spacing-xxl) 0; font-style: italic; }
@@ -151,11 +151,12 @@ body {
 .folder-item:hover h3 { color: var(--accent-azure-light); }
 
 /* Vista Galleria */
-.gallery-header { margin-bottom: var(--spacing-xl); border-bottom: 1px solid var(--border-color); padding-bottom: var(--spacing-lg); min-height: 1px; }
+.gallery-header { margin-bottom: var(--spacing-xl); border-bottom: 1px solid var(--border-color); padding-bottom: var(--spacing-lg); min-height: 1px; /* Mantiene spazio per bordo */ }
+/* Stile per il titolo galleria quando è nel suo posto originale */
 .gallery-header > #gallery-title { color: var(--text-primary); font-weight: 600; font-size: 1.8rem; text-align: center; }
 
-/* Stile generale pulsanti */
-.button-styled { background: transparent; color: var(--accent-azure-light); border: 1px solid var(--accent-azure-primary); padding: var(--spacing-md) var(--spacing-lg); border-radius: var(--border-radius-md); cursor: pointer; font-size: 1rem; font-weight: 600; transition: all var(--transition-fast); display: inline-flex; align-items: center; gap: var(--spacing-sm); }
+/* Stile generale pulsanti (usato solo per stile base bottone indietro) */
+.button-styled { background: transparent; color: var(--accent-azure-light); border: 1px solid var(--accent-azure-primary); padding: var(--spacing-md) var(--spacing-lg); border-radius: var(--border-radius-md); cursor: pointer; font-size: 1rem; font-weight: 600; transition: all var(--transition-fast); display: inline-flex; align-items: center; justify-content: center; /* Centra contenuto interno */ gap: var(--spacing-sm); }
 .button-styled:hover, .button-styled:focus { background: var(--azure-gradient); color: #ffffff; border-color: transparent; transform: translateY(-2px); box-shadow: 0 4px 15px var(--shadow-color-azure); outline: none; }
 
 .photo-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: var(--spacing-lg); }
@@ -170,7 +171,7 @@ body {
 .lightbox-container { position: relative; width: auto; height: auto; max-width: 90vw; max-height: 90vh; display: flex; flex-direction: column; align-items: center; transform: scale(0.9); opacity: 0; transition: transform var(--transition-slow) ease-out, opacity var(--transition-slow) ease-out; }
 .lightbox-overlay:not(.hidden) .lightbox-container { transform: scale(1); opacity: 1; }
 .lightbox-content { display: block; max-width: 100%; max-height: calc(85vh - 80px); object-fit: contain; border-radius: var(--border-radius-md); box-shadow: 0 15px 40px var(--shadow-color-dark); margin-bottom: var(--spacing-md); opacity: 1; transform: none; }
-#lightbox .lightbox-close { display: none !important; }
+#lightbox .lightbox-close { display: none !important; } /* Nasconde X */
 .lightbox-nav { position: absolute; top: 50%; transform: translateY(-50%); background-color: rgba(31, 41, 55, 0.6); color: var(--text-primary); border: 1px solid var(--border-color); border-radius: 50%; width: 60px; height: 60px; font-size: 30px; cursor: pointer; transition: all var(--transition-fast); z-index: 1005; display: flex; justify-content: center; align-items: center; opacity: 0.7; }
 .lightbox-nav:hover { background-color: var(--accent-azure-primary); border-color: var(--accent-azure-dark); transform: translateY(-50%) scale(1.05); opacity: 1; }
 .lightbox-prev { left: 20px; }
@@ -194,10 +195,10 @@ body {
      .main-header { padding: 0 var(--spacing-sm); min-height: 4.5rem; }
      .header-content { gap: var(--spacing-sm); }
      .header-content > #gallery-title { font-size: 1.1rem; }
-     /* --- MODIFICATO: Font bottone indietro per tablet --- */
      .header-content .button-styled#gallery-back-button {
-         padding: 0 var(--spacing-md);
-         font-size: 1rem; /* Era 0.8rem, aumentato */
+         padding: 0 var(--spacing-md); /* Padding orizzontale ridotto */
+         font-size: 1rem;
+         /* Altezza si adatta a min-height dell'header via stretch */
      }
      #main-title { font-size: 1.5rem; }
 
@@ -217,10 +218,9 @@ body {
      html { font-size: 14px; }
      .main-header { min-height: 4rem; }
      .header-content > #gallery-title { font-size: 1rem; }
-     /* --- MODIFICATO: Font bottone indietro per mobile piccolo --- */
      .header-content .button-styled#gallery-back-button {
-         padding: 0 var(--spacing-sm);
-         font-size: 0.9rem; /* Era 0.8rem, aumentato */
+         padding: 0 var(--spacing-sm); /* Padding orizzontale ridotto */
+         font-size: 0.9rem;
      }
 
      .folder-grid { grid-template-columns: repeat(2, 1fr); gap: var(--spacing-md); }
