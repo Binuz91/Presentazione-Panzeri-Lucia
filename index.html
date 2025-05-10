@@ -13,8 +13,8 @@
 
     <header class="main-header">
         <div class="header-content">
-             <h1 id="main-title">Esplorare, creare, sperimentare: Tutto è arte</h1>
-             </div>
+            <h1 id="main-title">Tutto è arte: Esplorare, creare, sperimentare</h1>
+        </div>
     </header>
 
     <main class="content-area">
@@ -27,13 +27,22 @@
             </div>
         </section>
 
+        <section id="alunni-video-view" class="view" aria-labelledby="alunni-video-title-heading">
+            <div class="view-content">
+                <h2 id="alunni-video-title-heading" class="section-title">Alunni</h2>
+                <div class="video-grid">
+                    <p class="loading-message">Caricamento video...</p>
+                </div>
+            </div>
+        </section>
+
         <section id="gallery-view" class="view" aria-labelledby="gallery-title">
-             <div class="view-content">
-                 <div class="gallery-header">
-                     <h2 id="gallery-title">Nome Cartella</h2>
+            <div class="view-content">
+                <div class="gallery-header">
+                    <h2 id="gallery-title">Nome Cartella</h2>
                 </div>
                 <div class="photo-grid">
-                     <p class="loading-message">Caricamento immagini...</p>
+                    <p class="loading-message">Caricamento immagini...</p>
                 </div>
             </div>
         </section>
@@ -48,6 +57,13 @@
             <div class="lightbox-audio-controls">
                 <audio id="lightbox-audio" controls></audio>
             </div>
+        </div>
+    </div>
+
+    <div id="video-lightbox" class="lightbox-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="video-lightbox-caption-text">
+        <div class="lightbox-container">
+            <video class="lightbox-video-content" controls preload="metadata"></video>
+            <div id="video-lightbox-caption-text" class="lightbox-caption">Nome Video</div>
         </div>
     </div>
 
